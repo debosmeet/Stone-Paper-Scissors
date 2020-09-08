@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>SPS</title>
+        <script src="https://kit.fontawesome.com/2ec0ba2502.js" crossorigin="anonymous"></script>
+        <script type="text/javascript">
+            var user= 0;
+            var bot;
+            var X =0;
+            var userscore = 0;
+            var botscore = 0;
+            //var opacity=0;
+            function selectstone(){
+                document.getElementById("stone").style.backgroundColor="blue";
+                document.getElementById("paper").style.backgroundColor="white";
+                document.getElementById("scissors").style.backgroundColor="white";
+                user=3;
+                //document.getElementById("userchoice").innerHTML="&#xf255";
+            }
+            function selectpaper(){
+                document.getElementById("stone").style.backgroundColor="white";
+                document.getElementById("paper").style.backgroundColor="blue";
+                document.getElementById("scissors").style.backgroundColor="white";
+                user=1;
+                //document.getElementById("userchoice").innerHTML="&#xf256";
+            }
+            function selectscissors(){
+                document.getElementById("stone").style.backgroundColor="white";
+                document.getElementById("paper").style.backgroundColor="white";
+                document.getElementById("scissors").style.backgroundColor="blue";
+                user=2;
+                //document.getElementById("userchoice").innerHTML="&#xf257";
+            }
+            function check(user,bot){
+                if(user==0){
+                    alert("CHOOSE ONE");
+                    document.getElementById("userchoicebg").style.backgroundColor="yellow";
+                    document.getElementById("botchoicebg").style.backgroundColor="yellow";
+                }
+                else if(user==3 && bot==1){
+                    botscore++;
+                    //document.getElementById("userscore").innerHTML=userscore;
+                    document.getElementById("botscore").innerHTML=botscore;
+                    document.getElementById("userchoicebg").style.backgroundColor="red";
+                    document.getElementById("botchoicebg").style.backgroundColor="green";
+                }
+                else if((bot==3 && user==1) || (user>bot)){
+                    userscore++;
+                    document.getElementById("userscore").innerHTML=userscore;
+                    //document.getElementById("botscore").innerHTML=botscore;
+                    document.getElementById("userchoicebg").style.backgroundColor="green";
+                    document.getElementById("botchoicebg").style.backgroundColor="red";
+                }
+                else if(bot>user){
+                    botscore++;
+                    //document.getElementById("userscore").innerHTML=userscore;
+                    document.getElementById("botscore").innerHTML=botscore;
+                    document.getElementById("userchoicebg").style.backgroundColor="red";
+                    document.getElementById("botchoicebg").style.backgroundColor="green";
+                }
+                else{
+                    document.getElementById("userchoicebg").style.backgroundColor="yellow";
+                    document.getElementById("botchoicebg").style.backgroundColor="yellow";
+                }
+                //checkgame();
+            }
+            function assign(user,bot){
+                if(user==3)
+                    document.getElementById("userchoice").innerHTML="&#xf255";
+                else if(user==1)
+                    document.getElementById("userchoice").innerHTML="&#xf256";
+                else if(user==2)
+                    document.getElementById("userchoice").innerHTML="&#xf257";
+                //else
+                //    alert("CHOOSE ONE");
+                if(bot==3)
+                    document.getElementById("botchoice").innerHTML="&#xf255";
+                else if(bot==1)
+                    document.getElementById("botchoice").innerHTML="&#xf256";
+                else if(bot==2)
+                    document.getElementById("botchoice").innerHTML="&#xf257";
+                //checkgame();
+            }
+            function checkgame(){
+                if(userscore==5){
+                    alert("YO! YOU WIN");
+                    stop();
+                }
+                if(botscore==5){
+                    alert("NOOB YOU LOST");
+                    stop();
+                }
+            }
+            function startgame(){
+                // X = window.setInterval(game,2000);
+                //game();
+                stone();
+            }
+            function stop(){
+                clearTimeout(X);
+                alert("GAME ENDED");
+                document.getElementById("userscore").innerHTML=0;
+                document.getElementById("botscore").innerHTML=0;
+                document.getElementById("userchoice").innerHTML=" ";
+                document.getElementById("botchoice").innerHTML=" ";
+                document.getElementById("userchoicebg").style.backgroundColor="white";
+                document.getElementById("botchoicebg").style.backgroundColor="white";
+                document.getElementById("stone").style.backgroundColor="white";
+                document.getElementById("paper").style.backgroundColor="white";
+                document.getElementById("scissors").style.backgroundColor="white";
+                document.getElementById("gamecall").innerHTML=" ";
+                userscore=0;
+                botscore=0;
+                user=0;
+            }
+            function game(){
+                //opacity= Number(window.getComputedStyle(document.getElementById("lstone")).getPropertyValue("opacity"));
+                //if(opacity>0){
+                //    opacity= opacity-0.2;
+                //    document.getElementById("lstone").style.opacity=opacity;
+                bot = Math.floor(Math.random()*3 ) +1;
+                assign(user,bot);
+                check(user,bot);
+                X= window.setTimeout(checkgame,300);
+                X =  window.setTimeout(stone,1500);
+               // X= window.setTimeout(checkgame,300);
+            }
+            function stone(){
+                document.getElementById("gamecall").innerHTML="STONE";
+                //checkgame();
+                X= window.setTimeout(paper,1500);
+            }
+            function paper(){
+                document.getElementById("gamecall").innerHTML="PAPER";
+               X= window.setTimeout(scissors,1500);
+            }
+            function scissors(){
+                document.getElementById("gamecall").innerHTML="SCISSORS!!!!";
+               // assign(user,bot);
+                //check(user,bot);
+               X = window.setTimeout(game,2500);
+            }
+        </script>
+        <style>
+            body{
+                background-color: lavender;
+                text-align: center;
+            }
+            h1{
+                text-align: center;
+                padding-bottom: 0px;
+                margin-bottom: 5px;;
+            }
+            div .choice{
+                background-color: white;
+                border: solid black 3px ;
+                height: 300px;
+                width: 300px;
+            }
+            section{
+                display:flex;
+            }
+            div{
+                margin: 20px 5px;
+                text-align: center;
+
+            }
+            div .hand{
+                background-color: white;
+                border: solid black 3px ;
+                width: max-content;
+                font-size:75px;
+                padding:10px;
+                margin:3px;
+            }
+            section div div{
+                display: flex;
+                margin-left: 0px;
+            }
+            .general {
+                height:30px;
+                margin: 0px 70px;
+                font-weight: bolder;
+                border: black solid 2px;
+            }
+            #center{ 
+                padding-top: 250px;
+                margin: 5px;
+                width:240px;
+            }
+            #center p{
+                font-size: 40px;
+                text-align: center;
+                padding: 0px;
+                margin: 0px 0px;
+                color: purple;
+            }
+            section>div>p>i{
+                padding: 25px;
+                font-size: 225px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>STONE-PAPER-SCISSORS</h1>
+        <section>
+            <div>
+                <h2>YOUR SCORE:</h2>
+                <h2 id="userscore">0</h2>
+                <p class="choice" id="userchoicebg"><i class="fas" id="userchoice"></i></p>
+                <div>
+                    <button onclick="selectstone()" id="stone" class="hand"><i class="fas fa-hand-rock"></i></button>
+                    <button onclick="selectpaper()" id="paper" class="hand"><i class="fas fa-hand-paper"></i></button>
+                    <button onclick="selectscissors()" id="scissors" class="hand"><i class="fas fa-hand-scissors"></i></button>
+                </div>
+            </div>
+            <div id="center">
+                <p style="opacity: 1;" id="gamecall"></p>
+            </div>    
+            <div><h2>BOT SCORE:</h2>
+                <h2 id="botscore">0</h2>
+                <p class="choice" id="botchoicebg"><i class="fas" id="botchoice"></i></p>
+            </div>
+        </section>
+        <button class="general" onclick="startgame()">START GAME</button>
+        <button class="general" onclick="stop()">END GAME</button>
+    </body>
+</html> 
